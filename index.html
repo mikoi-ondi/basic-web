@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang='ru'>
 
-<head>
-    <meta charset='utf-8'>
-    <title>Авторизация</title>
-</head>
+    <!DOCTYPE html>
+    <html lang='ru'>
 
-<div class="auth-page">
-    <h2>Страница аутентификации</h2>
-    <form action="auth.php" method="post">
-        <input type="text" name="email" placeholder="Email" />
-        <input type="password" name="password" placeholder="Password" />
-        <input type="submit" value="Submit" />
+    <head>
+        <meta charset='utf-8'>
+        <title>Главная</title>
+    </head>
+
+    <div class="auth-page">
+        <h2>Добрый день!</h2>
+        <form action="view/login_view.php" method="GET">
+            <input type="submit" value="Login" />
+        </form>
+
+        <form action="view/registration_view.php" method="GET">
+            <input type="submit" value="Registration" />
+        </form>
+    </div>
+
+
+
     </form>
-</div>
 
-</form>
+    </body>
 
-</body>
-
-</html>
+    </html>
