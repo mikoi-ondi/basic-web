@@ -21,14 +21,14 @@ function loginUser($conn) {
     $stmt->bind_param("s", $email);
     
     if (!$stmt->execute()) {
-        echo "Database error";
+        echo "Ошибка подключения к базе данных";
         return;
     }
     
     $result = $stmt->get_result();
   
     if ($result->num_rows !== 1) {
-        echo "Invalid email or password1";
+        echo "Введены неверные данные";
         return;
     }
   
@@ -36,12 +36,12 @@ function loginUser($conn) {
     $hash_pass = $row['password'];
   
     if (!password_verify($password, $hash_pass)) {
-        echo "Invalid email or password2";
+        echo "Введены неверные данные";
         
         return;
     }
     
-    echo "Login successful";
+    echo "Авторизация прошла успешно";
     $_SESSION['auth'] = true;
     header("Location: ../view/feedback_view.php");
     exit();

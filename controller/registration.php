@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php'; // defines the undefined vars
+require_once 'config.php'; 
 require_once 'prep_pass.php';
 
 define('MAX_EMAIL_LENGTH', 20);
@@ -10,7 +10,7 @@ function registerUser($conn) {
 
     // Check if input is missing
     if (empty($_POST['email']) || empty($_POST['password'])) {
-        echo "Email or password are missing";
+        echo "Введите имейл или пароль";
         return;
     }
 
@@ -21,13 +21,13 @@ function registerUser($conn) {
   
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Enter a valid email address";
+        echo "Введите корректный email адрес";
         return;
     }
   
     // Limit input length to avoid database errors
     if (strlen($email) > MAX_EMAIL_LENGTH || strlen($password) > MAX_PASSWORD_LENGTH) {
-        echo "Email or password are too long";
+        echo "Введенный email слишком длинный";
         return;
     }
   
@@ -40,7 +40,7 @@ function registerUser($conn) {
     );
   
     if (in_array(false, $password_requirements, true)) {
-        echo "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number";
+        echo "Пароль должен состоять не менее чем из 8 символов и содержать как минимум одну заглавную букву, одну строчную букву и одну цифру.";
         return;
     }
   
@@ -50,7 +50,7 @@ function registerUser($conn) {
     $stmt->bind_param("s", $email);
     
     if (!$stmt->execute()) {
-        echo "Unable to validate email: " . $stmt->error;
+        echo "Ошибка валидации email: " . $stmt->error;
         return;
     }
     
@@ -59,7 +59,7 @@ function registerUser($conn) {
     $stmt->close();
     
     if ($count > 0) {
-        echo "An account with that email already exists";
+        echo "Аккаунт с таки email уже существует";
         return;
     }
   
@@ -69,10 +69,10 @@ function registerUser($conn) {
     $stmt->bind_param("ss", $email, $hash_pass);
     
     if (!$stmt->execute()) {
-       echo "Unable to create account: " . $stmt->error; 
+       echo "Ошибка регистрации: " . $stmt->error; 
        return; 
       }
-       echo "Account created successfully";
+       echo "Регистрация прошла успешно";
        header('Location: ../view/login_view.php');
       
     } 
