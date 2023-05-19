@@ -1,7 +1,8 @@
 <?php
-include '../controller/login.php';
+
+session_start();
 if(isset($_SESSION['auth'])):
-    session_start(); ?>
+     ?>
 
     <!doctype html>
 <html lang="ru">

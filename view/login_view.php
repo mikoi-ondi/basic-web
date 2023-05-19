@@ -17,8 +17,9 @@
 
     <div class="auth-page">
         <h2>Введите данные</h2>
-        <form action="/controller/login.php" method="post">
-            <input type="text" name="email" placeholder="Email" />
+        <form action="/controller/login.php" method="POST">
+            <input type="text" name="email" placeholder="Email" 
+            value="<?php if (isset($_POST['email'])) echo $_POST['email'] ?>"/>
             <input type="password" name="password" placeholder="Password" />
             <input type="submit" value="Submit" />
         </form>

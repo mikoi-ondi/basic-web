@@ -1,26 +1,23 @@
 <?php
 
 require_once 'config.php'; // defines the undefined vars
+require_once 'prep_pass.php';
 
-define('MAX_EMAIL_LENGTH', 255);
-define('MAX_PASSWORD_LENGTH', 255);
-
-function sanitize_password($value) {
-    $value = trim($value); // Remove any white spaces at the beginning and end of the input.
-    $value = stripslashes($value); // Remove any backslashes in the input.
-    $value = htmlspecialchars($value); // Convert special characters to HTML entities.
-    return $value;
-}
+define('MAX_EMAIL_LENGTH', 20);
+define('MAX_PASSWORD_LENGTH', 16);
 
 function registerUser($conn) {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = sanitize_password($_POST['password']);
-  
+
     // Check if input is missing
-    if (empty($email) || empty($password)) {
+    if (empty($_POST['email']) || empty($_POST['password'])) {
         echo "Email or password are missing";
         return;
     }
+
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = prep_pass($_POST['password']);
+  
+    
   
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
