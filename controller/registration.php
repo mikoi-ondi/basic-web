@@ -8,7 +8,7 @@ define('MAX_PASSWORD_LENGTH', 16);
 
 function registerUser($conn) {
 
-    // Check if input is missing
+    
     if (empty($_POST['email']) || empty($_POST['password'])) {
         echo "Введите имейл или пароль";
         return;
@@ -19,19 +19,19 @@ function registerUser($conn) {
   
     
   
-    // Validate email format
+    
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "Введите корректный email адрес";
         return;
     }
   
-    // Limit input length to avoid database errors
+    
     if (strlen($email) > MAX_EMAIL_LENGTH || strlen($password) > MAX_PASSWORD_LENGTH) {
         echo "Введенный email слишком длинный";
         return;
     }
   
-    // Enforce password complexity requirements
+    
     $password_requirements = array(
         'uppercase' => preg_match('/[A-Z]/', $password),
         'lowercase' => preg_match('/[a-z]/', $password),
@@ -44,7 +44,7 @@ function registerUser($conn) {
         return;
     }
   
-    // Check if user already exists
+    
     $count = "SELECT COUNT(*) FROM users WHERE email = ?";
     $stmt = $conn->prepare($count);
     $stmt->bind_param("s", $email);
@@ -63,7 +63,7 @@ function registerUser($conn) {
         return;
     }
   
-    // Insert user into database
+   
     $hash_pass = password_hash($password, PASSWORD_DEFAULT);
     $stmt = $conn->prepare("INSERT INTO users(email, password) VALUES(?,?)");
     $stmt->bind_param("ss", $email, $hash_pass);
