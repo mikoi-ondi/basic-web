@@ -1,25 +1,24 @@
 <?php
 include "config.php";
-
-if(isset($_POST['email']) and isset($_POST['password'])) {
-    global $conn;
+global $conn;
+if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-     $sql = "INSERT INTO users SET email='$email', password='$password'";
-     $result = mysqli_query($conn, $sql);
-     header("Location: /view/login.html");
+     $stmt = $conn->prepare($sql = "INSERT INTO users SET email='$email', password='$password'");
+     $stmt->bind_param("ss", $email, password_hash($password, PASSWORD_DEFAULT));
+     $stmt->execute();
+     $stmt->close();
 
+     header("Location: /view/login_view.php");
+     exit();
     } else {
-        echo("Введите корректный email");
-    };
+        echo "Введите корректный email";
+    }
     
-
- };  
-    //$conn->close();
     
+ }
 
-?>
-
-
+ $conn->close();
