@@ -1,5 +1,4 @@
-
-    <!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
     
@@ -16,13 +15,14 @@
 </head>
 <body>
 
-    <div class="auth-page">
+    <div class="log-page">
         <h2>Введите данные</h2>
-        <form action="/controller/login.php" method="POST">
+        <form action="/controller/auth.php" method="POST">
+            <input type="hidden" name="action" value="login">
             <input type="text" name="email" placeholder="Email" 
             value="<?php if (isset($_POST['email'])) echo $_POST['email'] ?>"/>
             <input type="password" name="password" placeholder="Password" />
-            <input type="submit" value="Submit" />
+            <input type="submit" name="submit" value="Submit" />
         </form>
     </div>
 

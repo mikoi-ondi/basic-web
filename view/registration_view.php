@@ -15,9 +15,10 @@
 </head>
 <body>
 
-    <div class="auth-page">
+    <div class="reg-page">
         <h2>Введите данные</h2>
-        <form action="/controller/registration.php" method="POST">
+        <form action="/cotroller/auth.php" method="POST">
+            <input type="hidden" name="action" value="registration">
             <input name="email" placeholder="Email" type="email"
                    value="<?php if (isset($_POST['email'])) echo $_POST['email'] ?>"/>
 

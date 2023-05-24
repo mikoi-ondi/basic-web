@@ -1,6 +1,7 @@
 <?php
 
-require_once 'config.php'; 
+require_once 'config.php';
+require_once 'User.php'; 
 require_once 'prep_pass.php';
 
 define('MAX_EMAIL_LENGTH', 20);
