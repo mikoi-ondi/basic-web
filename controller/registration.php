@@ -45,7 +45,7 @@ function registerUser($conn) {
     }
   
     
-    $count = "SELECT COUNT(*) FROM users WHERE email = ?";
+    $count = "SELECT COUNT(*) FROM users WHERE email = ?"; //заменить на num_row
     $stmt = $conn->prepare($count);
     $stmt->bind_param("s", $email);
     

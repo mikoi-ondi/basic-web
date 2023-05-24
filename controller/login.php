@@ -21,7 +21,7 @@ function loginUser($conn) {
     $stmt->bind_param("s", $email);
     
     if (!$stmt->execute()) {
-        echo "Ошибка подключения к базе данных";
+        echo "Ошибка подключения к базе данных" . $stmt->error;
         return;
     }
     

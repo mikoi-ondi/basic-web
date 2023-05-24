@@ -1,10 +1,9 @@
 <?php
-
 session_start();
 if(isset($_SESSION['auth'])):
      ?>
 
-    <!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
     <title> Обратная связь </title>
@@ -21,36 +20,37 @@ if(isset($_SESSION['auth'])):
 </head>
 <body>
     
-<form>
+<form action="/controller/feedback.php" method=POST> 
   <div class="form-group">
-    <label for="subject">Вопрос:</label>
-    <input type="text" class="form-control" id="subject">
+    <label for="email">Ваш email:</label>
+    <input type="text" class="form-control" name="email">
   </div>
   <div class="form-group">
     <label for="message">Комментарий:</label>
-    <textarea class="form-control" id="message" rows="5"></textarea>
+    <textarea class="form-control" name="message" rows="5"></textarea>
   </div>
   <div class="form-group">
-    <label for="gender">Тип страхования Вашего автотранспорта:</label><br>
-    <label class="radio-inline"><input type="radio" name="gender" value="male">ОСАГО</label>
-    <label class="radio-inline"><input type="radio" name="gender" value="female">КАСКО</label>
+    <label for="">Ваш тип страховки:</label><br>
+    <label class="radio-inline"><input type="radio" name="insurance" value="osago">ОСАГО</label>
+    <label class="radio-inline"><input type="radio" name="insurance" value="casco">КАСКО</label>
   </div>
   <div class="form-group">
-    <label for="department">Тип автотранспорта:</label>
-    <select class="form-control" id="department">
-      <option value="">Выберите Ваш тип:</option>
-      <option value="hr">Легковой</option>
-      <option value="finance">Грузовой</option>
-      <option value="it">Грузопассажирский</option>
-      <option value="marketing">Автобусы</option>
+    <label for="opinion">Как вы оцениваете наш сервис?</label>
+    <select name="opinion" class="form-control">
+      <option value="0">Оцените по 5-балльной шкале:</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
     </select>
   </div>
   <div class="form-group">
-    <label for="services">Оказываемые услуги:</label><br>
-    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="consultation">Такси по городу</label>
-    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="analysis">Городской курьер</label>
-    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="training">Междугородние рейсы</label>
-    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="implementation">Междугородний курьер</label>
+    <label for="services">Что вам нравится в нашем сервисе?:</label><br>
+    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="usability">Удобство</label>
+    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="price">Стоимость услуг</label>
+    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="service">Обслуживание</label>
+    <label class="checkbox-inline"><input type="checkbox" name="services[]" value="nothing">Ничего</label>
   </div>
   <button type="submit" class="btn btn-primary">Отправить</button>
   <button type="reset" class="btn btn-primary">Сброс</button>
